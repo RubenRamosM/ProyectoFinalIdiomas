@@ -1,0 +1,39 @@
+﻿# ===== Python / Django =====
+venv/
+.env
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+staticfiles/
+media/
+
+# ===== Flutter / Dart =====
+**/build/
+**/.dart_tool/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.idea/
+**/.vscode/
+**/.gradle/
+
+# Android (Flutter)
+**/android/local.properties
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+# iOS (Flutter)
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/flutter_export_environment.sh
+
+# Nota: en apps Flutter normalmente SÍ se versiona el pubspec.lock.
+# Si quieres ignorarlo, descomenta la línea siguiente:
+# **/pubspec.lock
+
+# ===== SO / Otros =====
+.DS_Store
+Thumbs.db
+node_modules/

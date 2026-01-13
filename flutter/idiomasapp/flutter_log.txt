@@ -1,0 +1,5 @@
+Launching lib\main.dart on 22101316UG in debug mode...
+Running Gradle task 'assembleDebug'...                              7.7s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
+Installing build\app\outputs\flutter-apk\app-debug.apk...           4.8s
+I/flutter (24025): [IMPORTANT:flutter/shell/platform/android/android_context_vk_impeller.cc(61)] Using the Impeller rendering backend (Vulkan).

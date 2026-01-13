@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter:*)",
+      "Bash(dir)",
+      "Bash(venvScriptspython manage.py makemigrations:*)",
+      "Bash(./python:*)",
+      "Bash(dir:*)",
+      "Bash(python manage.py showmigrations:*)",
+      "Bash(.venvScriptspython manage.py showmigrations support)",
+      "Bash(\"venv\\Scripts\\python.exe\" manage.py showmigrations:*)",
+      "Bash(curl -X POST http://127.0.0.1:8000/api/auth/token/ -H \"Content-Type: application/json\" -d \"{\"\"username\"\":\"\"maria@test.com\"\",\"\"password\"\":\"\"password123\"\"}\")",
+      "Bash(curl -X POST http://127.0.0.1:8000/api/auth/token/ -H \"Content-Type: application/json\" -d \"{\"\"username\"\":\"\"maria\"\",\"\"password\"\":\"\"Test1234\"\"}\")",
+      "Bash(curl -X POST http://127.0.0.1:8000/api/support/tickets/ -H \"Content-Type: application/json\" -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNTM4OTI1LCJpYXQiOjE3NjA1Mzg2MjUsImp0aSI6IjI4OWI2MGJhOTAzYjQwODk4MmU4OTI5ZmZjMjRmYjYxIiwidXNlcl9pZCI6IjIifQ.jOuOD0U7VvFduEDzq-EAVs75rYfDKCw7CKDHZApmVik\" -d \"{\"\"subject\"\":\"\"Prueba de ticket\"\",\"\"message\"\":\"\"Este es un mensaje de prueba\"\"}\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
