@@ -210,7 +210,9 @@ class ExerciseOption(models.Model):
     exercise_localization = models.ForeignKey(
         ExerciseLocalization,
         related_name='options',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
     text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)
