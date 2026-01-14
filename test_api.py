@@ -27,21 +27,21 @@ def test_server():
     print_separator("TEST 1: Verificar Servidor")
     try:
         response = requests.get(f"{BASE_URL}/", timeout=5)
-        print(f"✅ Servidor está corriendo")
+        print(f"[OK] Servidor esta corriendo")
         print(f"Status Code: {response.status_code}")
         return True
     except requests.exceptions.ConnectionError:
-        print(f"❌ ERROR: No se puede conectar al servidor")
-        print(f"   Asegúrate de que Django esté corriendo en {BASE_URL}")
+        print(f"[ERROR] No se puede conectar al servidor")
+        print(f"   Asegurate de que Django este corriendo en {BASE_URL}")
         return False
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return False
 
 def test_register():
     """Probar registro de usuario"""
     print_separator("TEST 2: Registro de Usuario")
-    url = f"{BASE_URL}/api/auth/register/"
+    url = f"{BASE_URL}/api/users/register/"
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     data = {
@@ -65,13 +65,13 @@ def test_register():
         print_response(response)
 
         if response.status_code == 201:
-            print("✅ Registro exitoso")
+            print("[OK] Registro exitoso")
             return True, data['username']
         else:
-            print("⚠️  Registro falló")
+            print("[WARNING] Registro fallo")
             return False, None
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return False, None
 
 def test_login(username="maria", password="Test1234"):
@@ -92,20 +92,20 @@ def test_login(username="maria", password="Test1234"):
 
         if response.status_code == 200:
             tokens = response.json()
-            print("✅ Login exitoso")
+            print("[OK] Login exitoso")
             print(f"Access Token: {tokens['access'][:50]}...")
             return tokens['access']
         else:
-            print("❌ Login falló")
+            print("[ERROR] Login fallo")
             return None
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return None
 
 def test_me(token):
     """Probar endpoint protegido /me/"""
-    print_separator("TEST 4: GET /api/auth/me/")
-    url = f"{BASE_URL}/api/auth/me/"
+    print_separator("TEST 4: GET /api/users/me/")
+    url = f"{BASE_URL}/api/users/me/"
     headers = {
         "Authorization": f"Bearer {token}"
     }
@@ -118,19 +118,19 @@ def test_me(token):
         print_response(response)
 
         if response.status_code == 200:
-            print("✅ Endpoint /me/ funciona correctamente")
+            print("[OK] Endpoint /me/ funciona correctamente")
             return True
         else:
-            print("❌ Error al acceder a /me/")
+            print("[ERROR] Error al acceder a /me/")
             return False
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return False
 
 def test_lessons(token):
     """Probar lista de lecciones"""
-    print_separator("TEST 5: GET /api/lecciones/")
-    url = f"{BASE_URL}/api/lecciones/"
+    print_separator("TEST 5: GET /api/lessons/all-lessons/")
+    url = f"{BASE_URL}/api/lessons/all-lessons/"
     headers = {
         "Authorization": f"Bearer {token}"
     }
@@ -143,21 +143,21 @@ def test_lessons(token):
 
         if response.status_code == 200:
             lessons = response.json()
-            print(f"✅ Total de lecciones disponibles: {len(lessons)}")
+            print(f"[OK] Total de lecciones disponibles: {len(lessons)}")
 
             if lessons:
-                print(f"\nPrimera lección:")
+                print(f"\nPrimera leccion:")
                 print(json.dumps(lessons[0], indent=2, ensure_ascii=False))
             else:
-                print("⚠️  No hay lecciones en la base de datos")
+                print("[WARNING] No hay lecciones en la base de datos")
                 print("   Ejecuta: python manage.py seed_core_and_greetings")
             return True
         else:
-            print("❌ Error al obtener lecciones")
+            print("[ERROR] Error al obtener lecciones")
             print_response(response)
             return False
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return False
 
 def test_stats(token):
@@ -173,20 +173,20 @@ def test_stats(token):
         print_response(response)
 
         if response.status_code == 200:
-            print("✅ Estadísticas obtenidas correctamente")
+            print("[OK] Estadisticas obtenidas correctamente")
             return True
         else:
-            print("⚠️  Endpoint de estadísticas no responde correctamente")
+            print("[WARNING] Endpoint de estadisticas no responde correctamente")
             return False
     except Exception as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return False
 
 def main():
     """Ejecutar todos los tests"""
-    print("\n" + "╔" + "="*58 + "╗")
-    print("║" + " "*10 + "PRUEBAS DE API - BACKEND IDIOMAS" + " "*16 + "║")
-    print("╚" + "="*58 + "╝")
+    print("\n" + "="*60)
+    print(" "*10 + "PRUEBAS DE API - BACKEND IDIOMAS")
+    print("="*60)
 
     results = {
         "total": 0,
@@ -200,7 +200,7 @@ def main():
         results["passed"] += 1
     else:
         results["failed"] += 1
-        print("\n⚠️  El servidor no está corriendo. Deteniendo pruebas.")
+        print("\n[WARNING] El servidor no esta corriendo. Deteniendo pruebas.")
         print("\nPara iniciar el servidor, ejecuta:")
         print("  cd backend")
         print("  python manage.py runserver")
@@ -221,7 +221,7 @@ def main():
         results["passed"] += 1
     else:
         results["failed"] += 1
-        print("\n❌ No se pudo obtener token. Deteniendo pruebas.")
+        print("\n[ERROR] No se pudo obtener token. Deteniendo pruebas.")
         print_final_results(results)
         return
 
@@ -251,25 +251,25 @@ def main():
 
 def print_final_results(results):
     """Imprimir resultados finales"""
-    print("\n" + "╔" + "="*58 + "╗")
-    print("║" + " "*18 + "RESUMEN DE PRUEBAS" + " "*23 + "║")
-    print("╠" + "="*58 + "╣")
-    print(f"║  Total de pruebas: {results['total']:<42} ║")
-    print(f"║  ✅ Exitosas: {results['passed']:<46} ║")
-    print(f"║  ❌ Fallidas: {results['failed']:<46} ║")
-    print("╚" + "="*58 + "╝")
+    print("\n" + "="*60)
+    print(" "*18 + "RESUMEN DE PRUEBAS")
+    print("="*60)
+    print(f"  Total de pruebas: {results['total']}")
+    print(f"  [OK] Exitosas: {results['passed']}")
+    print(f"  [X] Fallidas: {results['failed']}")
+    print("="*60)
 
     if results['failed'] == 0:
-        print("\n🎉 ¡TODAS LAS PRUEBAS PASARON EXITOSAMENTE!")
+        print("\n[SUCCESS] TODAS LAS PRUEBAS PASARON EXITOSAMENTE!")
     else:
-        print(f"\n⚠️  {results['failed']} prueba(s) fallaron. Revisa los logs arriba.")
+        print(f"\n[WARNING] {results['failed']} prueba(s) fallaron. Revisa los logs arriba.")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n⚠️  Pruebas interrumpidas por el usuario")
+        print("\n\n[WARNING] Pruebas interrumpidas por el usuario")
     except Exception as e:
-        print(f"\n\n❌ ERROR CRÍTICO: {e}")
+        print(f"\n\n[ERROR] ERROR CRITICO: {e}")
         import traceback
         traceback.print_exc()
